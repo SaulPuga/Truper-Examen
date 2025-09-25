@@ -1,6 +1,7 @@
 package com.truper.demo.Controllers;
 
 import com.truper.demo.Dto.OrderDTO;
+import com.truper.demo.Exception.CustomException;
 import com.truper.demo.Model.OrdenEntity;
 import com.truper.demo.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class OrderController {
     }
     @PutMapping("/actualizar/status/{id}")
     public ResponseEntity<String>updateStatus(@RequestBody OrderDTO orden,
-                                                   @PathVariable ("id") Long id) throws com.truper.demo.Exception.Exception {
+                                                   @PathVariable ("id") Long id) throws CustomException {
         return ResponseEntity.ok(this.orderService.updateStatus(orden, id));
     }
 }

@@ -2,7 +2,7 @@ package com.truper.demo.Services;
 
 import com.truper.demo.Component.OrdenComponent;
 import com.truper.demo.Dto.OrderDTO;
-import com.truper.demo.Exception.Exception;
+import com.truper.demo.Exception.CustomException;
 import com.truper.demo.Model.OrdenEntity;
 import com.truper.demo.Repositories.OrderRepositorie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +38,10 @@ public class OrderService {
         return "Orden Actualizada con Exito";
     }
 
-    public OrderDTO searchOrder(Long id) throws Exception {
+    public OrderDTO searchOrder(Long id) throws CustomException {
         final Optional<OrdenEntity> ordenENcontrada = orderRepositorie.findById(id);
         if(ordenENcontrada.isEmpty()) {
-            throw new Exception("Orden con el id" +id +"no encontrado");
+            throw new CustomException("Orden con el id" +id +"no encontrado");
         }
         final OrdenEntity orden = ordenENcontrada.get();
         return new OrderDTO(orden.getId(), orden.getEstatus(), orden.getDescripcion(), orden.getCodigo());
@@ -53,7 +53,7 @@ public class OrderService {
         return optOrder.orElse(null);
     }*/
 
-    public String updateStatus(OrderDTO orden, Long id) throws Exception {
+    public String updateStatus(OrderDTO orden, Long id) throws CustomException {
         OrdenEntity nuevoStatus = orderRepositorie.findById(id).get();
         nuevoStatus.setEstatus(orden.getEstatus());
         orderRepositorie.save(nuevoStatus);
