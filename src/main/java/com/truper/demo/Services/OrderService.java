@@ -48,11 +48,6 @@ public class OrderService {
 
     }
 
-    /*public OrderDTO searchOrder1(Long id){
-        Optional<OrderDTO> optOrder = orderRepositorie.findById(id);
-        return optOrder.orElse(null);
-    }*/
-
     public String updateStatus(OrderDTO orden, Long id) throws OrdersException {
         OrdenEntity nuevoStatus = orderRepositorie.findById(id).get();
         nuevoStatus.setEstatus(orden.getEstatus());
